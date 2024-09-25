@@ -1,0 +1,58 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="2" rowHeight="350px">
+
+    <!-- Primera tarjeta con formulario -->
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>Agregar Estudiantes</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <form [formGroup]="studentForm">
+            <mat-form-field appearance="fill">
+              <mat-label>Nombre</mat-label>
+              <input matInput id="name" type="text" formControlName="name">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Apellido</mat-label>
+              <input matInput id="apellido" type="text" formControlName="apellido">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="button" (click)="addApellido()">
+              Agregar Apellido
+            </button>
+            <br>
+            <button mat-raised-button color="accent" type="button" (click)="createStudent()">
+              Agregar Persona
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- Segunda tarjeta con lista de estudiantes -->
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>Lista de Estudiantes</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <ul>
+            <li *ngFor="let student of studentsArray">
+              Nombre: {{ student.name }} | Apellidos: {{ student.apellidos.join(', ') }}
+              <button mat-icon-button (click)="openDialog(student.apellidos)">
+                <mat-icon>visibility</mat-icon> Mostrar Apellidos
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteStudent(student.id)">
+                <mat-icon>delete</mat-icon> Eliminar
+              </button>
+            </li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</div>
